@@ -1,0 +1,26 @@
+<div class="categories-section">
+  <div class="categories-box">
+    
+    <div class="text-center">
+      <h3 class="categories-title">Categories</h3>
+    </div>
+
+    <div class="title-line"></div>
+@for (mainCategory of getCategories(); track mainCategory.id) {
+    <details class="category-accordion">
+      <summary class="category-summary">
+        <span>{{mainCategory.category}}</span>
+      </summary>
+
+      <div class="category-content">
+        <ul class="category-list">
+          @for (subCategory of getCategories(mainCategory.id); track subCategory.id) {
+            <li><a href="#">{{subCategory.category}}</a></li>
+          }
+         
+        </ul>
+      </div>
+    </details>
+  }
+  </div>
+</div>
