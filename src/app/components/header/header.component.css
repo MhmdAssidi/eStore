@@ -1,0 +1,26 @@
+.header-search {
+  width: 50%;
+}
+
+.search-input {
+  padding-right: 40px; 
+}
+
+.searchBtn {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #6c757d; 
+  padding: 0 10px;
+  height: calc(100% - 10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchBtn:hover {
+  color: white;
+}
