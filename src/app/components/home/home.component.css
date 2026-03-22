@@ -1,0 +1,7 @@
+.row {
+  margin-left: 300px;
+}
+
+.col-md-9 {
+  width: calc(100vw - 300px);
+}
