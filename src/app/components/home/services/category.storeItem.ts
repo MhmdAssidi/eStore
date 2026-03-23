@@ -10,10 +10,9 @@ export class CategoriesStoreItem {
 
   readonly categories = this._categories.asReadonly();
 
-  //When _categories changes, topLevelCategories will be recomputed
   readonly topLevelCategories = computed(() =>
-  this._categories().filter(category => category.parent_category_id == null)
-);
+    this._categories().filter(category => category.parent_category_id == null)
+  );
 
   constructor(private categoryService: CategoryService) {
     this.loadCategories();
