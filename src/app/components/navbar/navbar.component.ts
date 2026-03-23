@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Category } from '../home/types/category';
-import { CategoryService } from '../home/services/category.service';
+import { CategoriesStoreItem } from '../home/services/category.storeItem';
 
 @Component({
   selector: 'app-navbar',
@@ -9,11 +8,7 @@ import { CategoryService } from '../home/services/category.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-categories:Category[]=[];
-
-constructor(categoryService:CategoryService){
-  categoryService.getAllCategories().subscribe(categories=>{
-    this.categories=categories.filter(category=>category.parent_category_id===null);
-  })  
+constructor(public categoryStore:CategoriesStoreItem){
+  
 }
 }

@@ -1,9 +1,8 @@
 <nav class="navbar-custom">
   <div class="container-fluid">
     <ul class="nav-list">
-      <li><a href="/home" class="nav-item">Home</a></li>
-      @for (category of categories; track category.id) {
-      <li><a href="javascript:void(0)" class="nav-item">{{category.category}}</a></li>
+      @for (category of categoryStore.topLevelCategories(); track category.id) {
+        <li><a href="javascript:void(0)" class="nav-item">{{ category.category }}</a></li>
       }
     </ul>
   </div>

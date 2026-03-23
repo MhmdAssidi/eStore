@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Category } from '../types/category';
-import { CategoryService } from '../services/category.service';
+import { CategoriesStoreItem } from '../services/category.storeItem';
 
 @Component({
   selector: 'app-sidenavigation',
@@ -9,29 +9,14 @@ import { CategoryService } from '../services/category.service';
   styleUrl: './sidenavigation.component.css'
 })
 export class SidenavigationComponent {
-  categories: Category[] = [];
+  private categoryStore = inject(CategoriesStoreItem);
+  readonly categories = this.categoryStore.categories;
 
-  constructor(categoryService: CategoryService) {
-    categoryService.getAllCategories().subscribe(categories => {
-      this.categories = categories;
-    });
+  getCategories(parentCategoryId?: number): Category[] {
+    if (parentCategoryId === undefined) {
+      return this.categories().filter(category => category.parent_category_id == null);
+    } else {
+      return this.categories().filter(category => category.parent_category_id === parentCategoryId);
+    }
   }
-
- getCategories(parentCategoryId?: number): Category[] {
-
-  // Case 1: No id so we need main categories
-  if (parentCategoryId === undefined) {
-    return this.categories.filter(category => {
-      return category.parent_category_id === null;
-    });
-  }
-
-  // Case 2: With id so we need subcategories
-  else {
-    return this.categories.filter(category => {
-      return category.parent_category_id === parentCategoryId;
-    });
-  }
-
-}
 }

@@ -10,9 +10,9 @@
       <div class="mx-auto header-search my-3 my-lg-0">
         <form class="d-flex position-relative">
           <select class="form-select me-2" style="width: auto; min-width: 100px;">
-            <option value="men">Men</option>
-            <option value="women">Women</option>
-            <option value="kids">Kids</option>
+            @for(category of categoryStore.topLevelCategories(); track category.id) {
+              <option value="{{ category.id }}">{{ category.category }}</option>
+            }
           </select>
           <div class="flex-grow-1 position-relative">
             <input

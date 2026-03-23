@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CategoriesStoreItem } from '../home/services/category.storeItem';
 
 @Component({
   selector: 'app-header',
@@ -8,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  constructor(public categoryStore:CategoriesStoreItem){
+  }
 }
