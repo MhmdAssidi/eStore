@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CategoriesStoreItem } from '../home/services/category.storeItem';
 
 @Component({
   selector: 'app-navbar',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-
+constructor(public categoryStore:CategoriesStoreItem){
+  
+}
 }

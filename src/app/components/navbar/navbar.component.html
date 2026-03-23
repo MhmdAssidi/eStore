@@ -1,10 +1,9 @@
 <nav class="navbar-custom">
   <div class="container-fluid">
     <ul class="nav-list">
-      <li><a href="#" class="nav-item">Men</a></li>
-      <li><a href="#" class="nav-item">Women</a></li>
-      <li><a href="#" class="nav-item">Kids</a></li>
-      <li><a href="#" class="nav-item best-offers">Best Offers</a></li>
+      @for (category of categoryStore.topLevelCategories(); track category.id) {
+        <li><a href="javascript:void(0)" class="nav-item">{{ category.category }}</a></li>
+      }
     </ul>
   </div>
 </nav>
