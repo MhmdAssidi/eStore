@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ProductsService } from './products.service';
-import { productListItem } from './products.type';
+import { ProductsService } from '../home/services/product/products.service';
+import { Product } from '../home/types/products.type';
 import { CommonModule } from '@angular/common';
+import { ProductsStoreItem } from '../home/services/product/products.storeItem';
 
 @Component({
   selector: 'app-products',
@@ -12,8 +13,8 @@ import { CommonModule } from '@angular/common';
 
 })
 export class ProductsComponent {
-products:productListItem[]=[];
-constructor(private productsService:ProductsService){
-  this.products=this.productsService.getProductsList();
+
+constructor(public productStoreItem:ProductsStoreItem){
+
 }
 }

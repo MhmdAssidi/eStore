@@ -1,0 +1,23 @@
+import { Injectable, signal } from "@angular/core";
+import { Product } from "../../types/products.type";
+import { ProductsService } from "./products.service";
+
+@Injectable()
+
+export class ProductsStoreItem {
+private readonly _products = signal<Product[]>([]);
+readonly products = this._products.asReadonly();
+
+constructor(private productsService: ProductsService) {
+  this.loadProducts();
+
+}
+
+loadProducts(filter?:{mainCategory?:number;subCategoryid?:number;}): void {
+  this.productsService.getAllProducts(filter).subscribe((products) => {
+    
+    this._products.set(products);
+  
+});
+}
+}
