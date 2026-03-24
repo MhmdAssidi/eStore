@@ -15,7 +15,7 @@
       <div class="category-content">
         <ul class="category-list">
           @for (subCategory of getCategories(mainCategory.id); track subCategory.id) {
-            <li><a href="#">{{subCategory.category}}</a></li>
+            <li><a (click)="onSubCategoryClicked(subCategory)" class="cursor-pointer">{{subCategory.category}}</a></li>
           }
          
         </ul>

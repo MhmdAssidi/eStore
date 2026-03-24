@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CategoriesStoreItem } from '../home/services/category.storeItem';
+import { CategoriesStoreItem } from '../home/services/category/category.storeItem';
 
 @Component({
   selector: 'app-header',
