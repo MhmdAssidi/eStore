@@ -5,13 +5,17 @@
   @for (product of productStoreItem.products(); track product.id) {
     <div class="product-card">
       <div class="product-image-box">
+        @defer(on viewport){
         <img
           class="product-image"
           [src]="'Assets/images/' + product.product_img"
           [alt]="product.product_name"
         >
-      </div>
+      } @placeholder {
+        <p>loading products</p>
+      }
 
+      </div>
       <div class="product-info">
         <h5 class="product-title">
           <a href="">{{ product.product_name }}</a>
