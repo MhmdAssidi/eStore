@@ -12,17 +12,21 @@ export class ProductsService {
 
   }
 
-  getAllProducts(filter?: { mainCategory?: number; subCategoryid?: number }): Observable<Product[]> {
-  let params = new HttpParams();
+  getAllProducts(filter?: { mainCategory?: number; subCategoryid?: number; keywords?: string }): Observable<Product[]> {
+    let params = new HttpParams();
 
-  if (filter?.mainCategory != null) {
-    params = params.set('maincategoryid', filter.mainCategory.toString());
+    if (filter?.mainCategory != null) {
+      params = params.set('maincategoryid', filter.mainCategory.toString());
+    }
+
+    if (filter?.subCategoryid != null) {
+      params = params.set('subcategoryid', filter.subCategoryid.toString());
+    }
+
+    if (filter?.keywords && filter.keywords.trim() !== '') {
+      params = params.set('keywords', filter.keywords.trim());
+    }
+
+    return this.http.get<Product[]>(this.API_URL, { params });
   }
-
-  if (filter?.subCategoryid != null) {
-    params = params.set('subcategoryid', filter.subCategoryid.toString());
-  }
-
-  return this.http.get<Product[]>(this.API_URL, { params });
-}
 }

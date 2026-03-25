@@ -77,3 +77,10 @@
     height: 320px;
   }
 }
+.no-products-message{
+  font-size: 40px;
+  text-align: center;
+  color: red;
+  font-weight: bolder;
+
+}

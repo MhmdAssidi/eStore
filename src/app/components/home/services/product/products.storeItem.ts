@@ -13,7 +13,7 @@ constructor(private productsService: ProductsService) {
 
 }
 
-loadProducts(filter?: { mainCategory?: number; subCategoryid?: number }): void {
+loadProducts(filter?: { mainCategory?: number; subCategoryid?: number; keywords?: string }): void {
   this.productsService.getAllProducts(filter).subscribe(products => {
     this._products.set(products);
   });
