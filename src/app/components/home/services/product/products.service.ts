@@ -12,15 +12,17 @@ export class ProductsService {
 
   }
 
-  getAllProducts(filter?:{mainCategory?:number;subCategoryid?:number;}):
-       Observable<Product[]>{
-        let params=new HttpParams();
-        if(filter?.mainCategory!=null){
-        params=params.set('mainCategory',filter.mainCategory.toString());
-        }
-        if(filter?.subCategoryid!=null){
-          params=params.set('subCategoryid',filter.subCategoryid.toString());
-        }
-    return this.http.get<Product[]>(this.API_URL,{params});
+  getAllProducts(filter?: { mainCategory?: number; subCategoryid?: number }): Observable<Product[]> {
+  let params = new HttpParams();
+
+  if (filter?.mainCategory != null) {
+    params = params.set('maincategoryid', filter.mainCategory.toString());
   }
+
+  if (filter?.subCategoryid != null) {
+    params = params.set('subcategoryid', filter.subCategoryid.toString());
+  }
+
+  return this.http.get<Product[]>(this.API_URL, { params });
+}
 }
