@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, output } from '@angular/core';
 import { CategoriesStoreItem } from '../home/services/category/category.storeItem';
+import { SearchKeyword } from '../home/types/searchKeyword.type';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,14 @@ import { CategoriesStoreItem } from '../home/services/category/category.storeIte
 })
 export class HeaderComponent {
 
-  constructor(public categoryStore:CategoriesStoreItem){
+   readonly searchClicked = output<SearchKeyword>(); 
+
+  constructor(public categoryStore: CategoriesStoreItem) {}
+
+  onClickSearch(keywords: string, categoryId: string): void {
+    this.searchClicked.emit({
+      categoryId: Number(categoryId),
+      keywords: keywords
+    });
   }
 }
