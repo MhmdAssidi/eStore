@@ -24,4 +24,9 @@ onSelectSubCategory(subCategoryId: number): void {
   this.productsStoreItem.loadProducts({subCategoryid: subCategoryId});    
 
 }
+
+onSelectCategory(mainCategoryId: number): void {
+  this.productsStoreItem.loadProducts({mainCategory: mainCategoryId});    
+}
+
 }
