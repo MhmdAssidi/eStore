@@ -26,6 +26,7 @@
         </a>
         <p class="product-price">{{ product.price | currency }}</p>
       </div>
+      <button (click)="addToCart(product)" class="btn btn-primary">Add to cart</button>
     </div>
   }
 </div>
