@@ -1,0 +1,76 @@
+<div class="cart-container">
+    @if(!cartStore.cart().products.length){
+        <div class="empty-cart">
+            <div class="empty-cart-icon">🛒</div>
+            <h2>Your Cart is Empty</h2>
+            <p>Looks like you haven't added anything to your cart yet.</p>
+            <button class="btn btn-primary btn-lg" (click)="goToProducts()">Start Shopping</button>
+        </div>
+    } @else if(cartStore.cart()){
+        <div class="cart-wrapper">
+            <h1 class="cart-title">Shopping Cart</h1>
+            
+            <div class="cart-content">
+                <div class="cart-items-section">
+                    <div class="cart-items-header">
+                        <span>Product</span>
+                        <span>Name</span>
+                        <span>Price</span>
+                        <span>Subtotal</span>
+                        <span>total price</span>
+
+
+                    </div>
+                    
+                    @for(item of cartStore.cart().products; track item.product.id){
+                        <div class="cart-item">
+                            <div class="item-image">
+                                <img [src]="'Assets/images/' + item.product.product_img" alt="{{ item.product.product_name }}">
+                            </div>
+                            <div class="item-info">
+                                <h4>{{ item.product.product_name }}</h4>
+                            </div>
+                            <div class="item-price">
+                                {{ item.product.price | currency }}
+                            </div>
+                            <div class="item-quantity">
+                                <button class="qty-btn" (click)="updateQuantity($event, item)">−</button>
+                                <span class="qty-value">{{ item.quantity }}</span>
+                                <button class="qty-btn" (click)="updateQuantity($event, item)">+</button>
+                            </div>
+                            <div class="item-subtotal">
+                                {{ (item.product.price * item.quantity) | currency }}
+                            </div>
+                            <button class="btn-remove" (click)="removeItem(item)"><i class="bi bi-trash"></i></button>
+                        </div>
+                    }
+                </div>
+                
+                <div class="cart-summary">
+                    <div class="summary-box">
+                        <h3>Order Summary</h3>
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span>{{ cartStore.totalAmount() | currency }}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping:</span>
+                            <span>{{ getShippingCost() === 0 ? 'Free' : (getShippingCost() | currency) }}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (10%):</span>
+                            <span>{{ getTax() | currency }}</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-total">
+                            <span>Total:</span>
+                            <span>{{ getTotal() | currency }}</span>
+                        </div>
+                        <button class="btn btn-success btn-checkout">Proceed to Checkout</button>
+                        <button class="btn btn-secondary btn-continue" (click)="goToProducts()">Continue Shopping</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
