@@ -1,0 +1,15 @@
+<div class="productDesc-Container">
+    <div class="img-container">
+<img [src]="'Assets/images/' + product()?.product_img" alt="Product image">    </div>
+    <div class="desc-container">
+    <div>
+        <span>{{ product()?.product_name }}</span>
+    </div>
+    <hr>
+    <div>
+        price: <span>{{ product()?.price | currency }}</span>
+    </div>
+    <div class="inclusive">inclusive of tax</div>
+    <div>{{ product()?.product_description }}</div>
+    </div>
+</div>
