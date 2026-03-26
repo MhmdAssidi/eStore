@@ -1,12 +1,12 @@
 import { Component, Output, EventEmitter, output, signal } from '@angular/core';
 import { CategoriesStoreItem } from '../home/services/category/category.storeItem';
 import { SearchKeyword } from '../home/types/searchKeyword.type';
-import { NavigationEnd,Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { cartStoreItem } from '../home/services/cart/cart.storeItem';
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

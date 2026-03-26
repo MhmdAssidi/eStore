@@ -1,10 +1,17 @@
-import { computed, signal } from "@angular/core";
+import { computed, effect, signal } from "@angular/core";
 import { CartItem } from "../../types/cart.type";
 import { Product } from "../../types/products.type";
 
 export class cartStoreItem {
-    private readonly _products=signal<CartItem[]>([]);
-
+    private readonly _products=signal<CartItem[]>(this.loadFromSession());
+    private _saveEffect=effect(() => {
+        const products=this._products();
+        if(products.length===0){
+            sessionStorage.removeItem('cart');
+        } else {
+            sessionStorage.setItem('cart', JSON.stringify(products));
+        }
+    });
     readonly totalAmount=computed(()=>{  //total cost of all products in the cart
     return this._products().reduce((sum,item)=>sum+item.amount,0);
     });
@@ -48,6 +55,40 @@ export class cartStoreItem {
             this._products.set(updatedItems);
         }
 
+
+    }
+decreaseProductQuantity(cartItem:CartItem){
+    const updatedItems=this._products().map(item=>{
+        if(item.product.id===cartItem.product.id){ //the product is in the cart
+            if(item.quantity<=1){
+                return null; //remove the item from the cart if quantity is 1 or less
+            }
+            const newQuantity=item.quantity-1;
+            return{
+                ...item,
+                quantity:newQuantity,
+                amount:item.amount-Number(item.product.price) //update the amount based on the new quantity
+            }
+        }
+        return item;
+    }).filter(Boolean) as CartItem[]; //remove null items from the array
+    this._products.set(updatedItems);
+}
+
+removeProduct(cartItem: CartItem): void {
+  //  Create a new array excluding the target item
+  const updatedItems = this._products().filter(
+    item => item.product.id !== cartItem.product.id);
+
+  // Update the state signal with the new array
+  this._products.set(updatedItems);
+}
+
+private loadFromSession():CartItem[]{
+    const storedProducts=sessionStorage.getItem('cart');
+    return storedProducts ? JSON.parse(storedProducts) : [];
+}
+}
 //  User clicks "Add to Cart"
 // → addProduct(product) is called
 // → check if product exists
@@ -56,5 +97,3 @@ export class cartStoreItem {
 // → update signal
 // → totals recalculate automatically
 // → UI updates
-    }
-}

@@ -23,3 +23,7 @@
 .nav-link{
   position: relative;
 }
+
+.cart-count {
+  pointer-events: none;
+}
