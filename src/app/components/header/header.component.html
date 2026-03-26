@@ -7,6 +7,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarContent">
+      @if(displaySearch()){
       <div class="mx-auto header-search my-3 my-lg-0">
         <form class="d-flex position-relative">
           <select #categoryOptions class="form-select me-2" style="width: auto; min-width: 100px;">
@@ -25,6 +26,7 @@
           </div>
         </form>
       </div>
+      }
       <div class="navbar-nav ms-auto d-flex align-items-center">
         <a href="#" class="nav-link text-white me-3">Sign In / Register</a>
         <a href="#" class="nav-link text-white me-3"><i class="bi bi-heart"></i></a>

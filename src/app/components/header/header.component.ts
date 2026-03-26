@@ -1,7 +1,8 @@
-import { Component, Output, EventEmitter, output } from '@angular/core';
+import { Component, Output, EventEmitter, output, signal } from '@angular/core';
 import { CategoriesStoreItem } from '../home/services/category/category.storeItem';
 import { SearchKeyword } from '../home/types/searchKeyword.type';
-
+import { NavigationEnd,Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-header',
   imports: [],
@@ -11,8 +12,14 @@ import { SearchKeyword } from '../home/types/searchKeyword.type';
 export class HeaderComponent {
 
    readonly searchClicked = output<SearchKeyword>(); 
-
-  constructor(public categoryStore: CategoriesStoreItem) {}
+  displaySearch=signal(true);
+  constructor(public categoryStore: CategoriesStoreItem,private router:Router) {
+    router.events. //listens to any navigation (page change) in Angular.
+    pipe(filter(event => event instanceof NavigationEnd //We only care when the navigation is completed, not during loading. and we care for the veent of naviagtion end only thats why we filter
+    )).subscribe(() => {
+      this.displaySearch.set(router.url === '/home/products');
+    });
+  }
 
   onClickSearch(keywords: string, categoryId: string): void {
     this.searchClicked.emit({

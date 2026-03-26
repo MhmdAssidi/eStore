@@ -1,9 +1,11 @@
+@if(displayOptions()){
 <nav class="navbar-custom">
   <div class="container-fluid">
     <ul class="nav-list">
       @for (category of categoryStore.topLevelCategories(); track category.id) {
-        <li><a (click)="onCategoryClicked(category)" class="nav-item cursor-pointer">{{ category.category }}</a></li>
+        <li><a routerLink="/home/products" (click)="onCategoryClicked(category)" class="nav-item cursor-pointer">{{ category.category }}</a></li>
       }
     </ul>
   </div>
 </nav>
+}
