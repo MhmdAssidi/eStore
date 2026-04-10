@@ -61,8 +61,8 @@ export class UserSignupComponent {
 
   const newUser:User = {
     id:0,
-    firstName: formValue.firstName,
-    lastName: formValue.lastName,
+    firstname: formValue.firstName,
+    lastname: formValue.lastName,
     address: formValue.address,
     city: formValue.city,
     state: formValue.state,

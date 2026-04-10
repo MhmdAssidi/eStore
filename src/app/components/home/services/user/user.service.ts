@@ -11,7 +11,16 @@ export class UserService {
 
     createUser(user:User):Observable<any>{
          const url :string='http://localhost:5001/users/signup';
-         return this.http.post(url, user);
+      return this.http.post(url, {
+        firstname: user.firstname,
+        lastname: user.lastname,
+        address: user.address,
+        city: user.city,
+        state: user.state,
+        pin: user.pin,
+        email: user.email,
+        password: user.password
+      });
     } 
 
     loginUser(email:string,password:string):Observable<any>{

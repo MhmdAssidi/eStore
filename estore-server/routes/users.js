@@ -12,7 +12,7 @@ user.post('/signup', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    await pool.query('INSERT INTO users (firstname, lastname, address, city, state, pin, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+    await pool.query('INSERT INTO users (firstName, lastName, address, city, state, pin, email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
         [firstname, lastname, address, city, state, pin, email, hashedPassword]);
     res.status(201).json({ message: 'User registered successfully' });
 
@@ -20,8 +20,7 @@ user.post('/signup', async (req, res) => {
 
 user.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    const [user] = await pool.promise().query('SELECT * FROM users WHERE email = ?', [email]);
-    if (user.length === 0) {
+const [users] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);    if (users.length === 0) {
         return res.status(400).json({ message: 'User not found' });
     }
 
