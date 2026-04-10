@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../../types/user.type';
+import { LoginToken, User } from '../../types/user.type';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +15,16 @@ export class UserService {
    createUser(user: User): Observable<any> {
     const url = 'http://localhost:5001/users/signup';
 
-    return this.http.post(url, {
-      firstname: user.firstName,
-      lastname: user.lastName,
-      address: user.address,
-      city: user.city,
-      state: user.state,
-      pin: user.pin,
-      email: user.email,
-      password: user.password
-    });
+    return this.http.post(url,user)
+      };
+   
+   login(email:string,password:string):Observable<any>{
+    const url='http://localhost:5001/users/login';
+    return this.http.post(url,{email:email,password:password});
+   }   
+
+   activateToken(token:LoginToken):void{
+    localStorage.setItem('token',token.token);
+    localStorage.setItem('expiry',new Date().getTime()+(token.expiresInSeconds*1000).toString());
    }
 }

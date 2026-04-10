@@ -36,6 +36,15 @@
             <div class="login-footer">
                 <p>Don't have an account? <a routerLink="/home/signup">Register here</a></p>
             </div>
+
+            @if(alertMessage!==''){
+        <div [ngClass]="{
+         'success-alert': alertType === 0,
+        'error-alert': alertType === 1
+         }">
+        <p>{{alertMessage}}</p>
+     </div>
+     }
         </form>
     </div>
 </div>
