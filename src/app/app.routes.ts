@@ -5,6 +5,7 @@ import { ProductsGalleryComponent } from './components/home/products-gallery/pro
 import { ProductDetailsComponent } from './components/home/product-details/product-details.component';
 import { CartComponent } from './components/home/cart/cart.component';
 import { UserSignupComponent } from './components/home/user/user-signup/user-signup.component';
+import { UserLoginComponent } from './components/home/user/user-login/user-login.component';
 
 export const routes: Routes = [
   { path: 'home', loadComponent: () =>
@@ -26,6 +27,10 @@ export const routes: Routes = [
       {
         path:'signup',
         component:UserSignupComponent
+      },
+      {
+        path:'login',
+        component:UserLoginComponent
       }
      ]
     },
