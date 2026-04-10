@@ -1,0 +1,41 @@
+<div class="login-page">
+    <div class="login-card">
+        <div class="title-box">
+            <h2>Login to Your Account</h2>
+            <p>Access your cart, orders, and saved details.</p>
+        </div>
+
+        <form [formGroup]="userLoginForm" (ngSubmit)="onSubmit()" class="login-form">
+            <div class="form-row single-row">
+                <div class="form-group full-width">
+                    <label for="email">Email <span class="text-danger">*</span></label>
+                    <input id="email" formControlName="email" type="email" placeholder="Enter your email">
+                    @if(email?.touched && email?.errors?.['required']) {
+                        <span class="text-danger">Email is required.</span>
+                    }
+                    @if(email?.touched && email?.errors?.['email']) {
+                        <span class="text-danger">Please enter a valid email address.</span>
+                    }
+                </div>
+            </div>
+
+            <div class="form-row single-row">
+                <div class="form-group full-width">
+                    <label for="password">Password <span class="text-danger">*</span></label>
+                    <input id="password" formControlName="password" type="password" placeholder="Enter your password">
+                    @if(password?.touched && password?.errors?.['required']) {
+                        <span class="text-danger">Password is required.</span>
+                    }
+                </div>
+            </div>
+
+            <div class="button-box">
+                <button type="submit" [disabled]="userLoginForm.invalid">Login</button>
+            </div>
+
+            <div class="login-footer">
+                <p>Don't have an account? <a routerLink="/home/signup">Register here</a></p>
+            </div>
+        </form>
+    </div>
+</div>
