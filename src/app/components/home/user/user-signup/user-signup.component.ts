@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule,AbstractControl,Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { matchPasswordValidator } from './validators/match-passworrd.validators';
 import {  UserService } from '../services/user.service';
 import { User } from '../../types/user.type';
@@ -16,7 +17,7 @@ export class UserSignupComponent {
   userSignupForm: FormGroup;
   alertMessage: string = '';
   alertType:number = 0; //0: no alert, 1: success, 2: error
-  constructor(private fb: FormBuilder,private userService: UserService) {
+  constructor(private fb: FormBuilder,private userService: UserService, private router: Router) {
     this.userSignupForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: [''],
@@ -79,6 +80,7 @@ export class UserSignupComponent {
         this.alertMessage = 'User created successfully!';
         this.alertType = 0; 
         this.userSignupForm.reset();
+        void this.router.navigate(['/home/login']);
       } else {
         this.alertMessage = 'Email already exists. Please use a different email.';
         this.alertType = 1;

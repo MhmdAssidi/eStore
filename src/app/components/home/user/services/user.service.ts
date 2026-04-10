@@ -25,6 +25,6 @@ export class UserService {
 
    activateToken(token:LoginToken):void{
     localStorage.setItem('token',token.token);
-    localStorage.setItem('expiry',new Date().getTime()+(token.expiresInSeconds*1000).toString());
+    localStorage.setItem('expiry', (new Date().getTime() + token.expiresInSeconds * 1000).toString());
    }
 }
