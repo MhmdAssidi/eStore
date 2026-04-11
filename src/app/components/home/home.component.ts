@@ -5,7 +5,7 @@ import { CategoryService } from './services/category/category.service';
 import { CategoriesStoreItem } from './services/category/category.storeItem';
 import { ProductsStoreItem } from './services/product/products.storeItem';
 import { ProductsService } from './services/product/products.service';
-import { UserService } from './services/user/user.service';
+import { UserService } from './user/services/user.service';
 import { SearchKeyword } from './types/searchKeyword.type';
 import { RouterOutlet } from '@angular/router';
 import { cartStoreItem } from './services/cart/cart.storeItem';

@@ -35,7 +35,19 @@ userRouter.post('/login', async (req, res) => {
         "estore_secret_key",
         { expiresIn: '1h' }
     );
-    res.status(200).json({ token,expiresInSeconds:3600, message: 'Login successful' });
+    res.status(200).json({ 
+        token: token,
+        user:{
+            firstname: users[0].firstName,
+            lastname: users[0].lastName,
+            address: users[0].address,
+            city: users[0].city,
+            state: users[0].state,
+            pin: users[0].pin,
+            email: users[0].email
+        },
+        expiresInSeconds:3600,
+        message: 'Login successful' });
 
 });
 module.exports = userRouter;
