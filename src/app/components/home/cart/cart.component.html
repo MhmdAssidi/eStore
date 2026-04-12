@@ -47,6 +47,32 @@
                 </div>
                 
                 <div class="cart-summary">
+                    <form class="delivery-form" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+                        <h2>Delivery Address</h2>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input id="name" type="text" formControlName="name" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <input id="address" type="text" formControlName="address" placeholder="Enter your address">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input id="city" type="text" formControlName="city" placeholder="City">
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input id="state" type="text" formControlName="state" placeholder="State">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pin">PIN</label>
+                            <input id="pin" type="text" formControlName="pin" placeholder="6-digit PIN">
+                        </div>
+                    </form>
+
                     <div class="summary-box">
                         <h3>Order Summary</h3>
                         <div class="summary-row">
@@ -66,7 +92,7 @@
                             <span>Total:</span>
                             <span>{{ getTotal() | currency }}</span>
                         </div>
-                        <button class="btn btn-success btn-checkout">Proceed to Checkout</button>
+                        <button class="btn btn-success btn-checkout" [disabled]="orderForm.invalid" (click)="onSubmit()">Proceed to Checkout</button>
                         <button class="btn btn-secondary btn-continue" (click)="goToProducts()">Continue Shopping</button>
                     </div>
                 </div>
