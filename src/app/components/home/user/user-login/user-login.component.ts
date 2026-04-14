@@ -45,7 +45,7 @@ get password():AbstractControl<any,any>| null{
       next:(result:LoginToken)=>{
         this.userLoginForm.enable();
         if(result.token){
-          this.userService.activateToken(result);
+          this.userService.activateToken(result,this.email?.value);
           this.alertType=0;
           this.alertMessage='Login successful!';
           this.userLoginForm.reset();

@@ -5,6 +5,7 @@ import { cartStoreItem } from '../services/cart/cart.storeItem';
 import { CurrencyPipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../user/services/user.service';
+import { OrderService } from '../services/order/order.service';
 
 @Component({
   selector: 'app-cart',
@@ -14,13 +15,17 @@ import { UserService } from '../user/services/user.service';
 })
 export class CartComponent {
 
+  alertType:number=0;
+  alertMessage:string='';
+  disableCheckout:boolean=false;
   orderForm: any;
 
 constructor(
   public cartStore: cartStoreItem,
   private router: Router,
   private userService: UserService,
-  private fb: FormBuilder
+  private fb: FormBuilder,
+  private orderService: OrderService
 ) {
   this.orderForm = this.fb.group({
     name: ['', Validators.required],
