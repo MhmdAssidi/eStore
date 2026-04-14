@@ -12,6 +12,8 @@ private isAuthenticated=signal<boolean>(false);
 private loggedInUser=signal<loggedInUser>({}as loggedInUser);
 
 private autoLogoutTimer:any;
+private authToken!:string;
+
     get isUserAuthenticated():boolean{
       return this.isAuthenticated();
     }
@@ -21,7 +23,9 @@ private autoLogoutTimer:any;
     get loggedInUsers$():Observable<loggedInUser>{
       return toObservable(this.loggedInUser);
     }
-  
+  get token():string{
+    return this.authToken;
+  }
     loginUser(email:string,password:string):Observable<any>{
         const url :string='http://localhost:5001/users/login';
         return this.http.post(url, {email,password});
@@ -41,7 +45,7 @@ private autoLogoutTimer:any;
     return this.http.post(url,{email:email,password:password});
    }   
 
-   activateToken(token:LoginToken):void{
+   activateToken(token:LoginToken,email:string):void{
     localStorage.setItem('token',token.token);
     localStorage.setItem('expiry', (new Date().getTime() + token.expiresInSeconds * 1000).toString());
 
@@ -51,12 +55,12 @@ private autoLogoutTimer:any;
     localStorage.setItem('city',token.user.city);
     localStorage.setItem('state',token.user.state);
     localStorage.setItem('pin',token.user.pin);
-    localStorage.setItem('email',token.user.email);
+    localStorage.setItem('email',email);
 
     this.isAuthenticated.set(true);
     this.loggedInUser.set(token.user);
-      this.setAutoLogout(token.expiresInSeconds * 1000);
-
+    this.setAutoLogout(token.expiresInSeconds * 1000);
+    this.authToken=token.token;
   }
 
 
@@ -97,6 +101,7 @@ private autoLogoutTimer:any;
       this.isAuthenticated.set(true);
       this.loggedInUser.set(user);
       this.setAutoLogout(remainingMs);
+      this.authToken=token;
       }
       else{
         this.logout();

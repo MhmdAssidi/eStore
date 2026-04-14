@@ -9,12 +9,13 @@ import { UserService } from './user/services/user.service';
 import { SearchKeyword } from './types/searchKeyword.type';
 import { RouterOutlet } from '@angular/router';
 import { cartStoreItem } from './services/cart/cart.storeItem';
+import { OrderService } from './services/order/order.service';
 @Component({
   selector: 'app-home',
   imports: [HeaderComponent, NavbarComponent, RouterOutlet],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
-  providers:[CategoryService,CategoriesStoreItem,ProductsStoreItem,ProductsService,cartStoreItem,UserService]
+  providers:[CategoryService,CategoriesStoreItem,ProductsStoreItem,ProductsService,cartStoreItem,UserService,OrderService]
 })
 export class HomeComponent {
 constructor(private categoriesStoreItem:CategoriesStoreItem,private productsStoreItem:ProductsStoreItem){

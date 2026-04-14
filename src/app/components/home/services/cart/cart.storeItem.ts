@@ -88,6 +88,12 @@ private loadFromSession():CartItem[]{
     const storedProducts=sessionStorage.getItem('cart');
     return storedProducts ? JSON.parse(storedProducts) : [];
 }
+
+clearCart(): void {
+    sessionStorage.clear();
+    this.cart().products=[];
+    this.cart().totalAmount=0;
+    this.cart().totalProducts=0;
 }
 //  User clicks "Add to Cart"
 // → addProduct(product) is called
@@ -97,3 +103,5 @@ private loadFromSession():CartItem[]{
 // → update signal
 // → totals recalculate automatically
 // → UI updates
+}
+
